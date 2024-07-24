@@ -124,10 +124,10 @@ export default class BubbleChart extends Component {
   .style("fill", function(d) { return d.data.color ? d.data.color : color(nodes.indexOf(d)); })
   .style("z-index", 1)
   .on('mouseover', function(d) {
-    d3.select(this).transition().duration(200).attr("r", d.r * 1.04);
+    d3.select(this).transition().duration(1000).attr("r", d.r * 1.04);
   })
   .on('mouseout', function(d) {
-    d3.select(this).transition().duration(200).attr("r", d.r - (d.r * 0.04));
+    d3.select(this).transition().duration(1000).attr("r", d.r - (d.r * 0.04));
   });
 
     node.append("clipPath")
