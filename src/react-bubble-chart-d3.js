@@ -106,18 +106,29 @@ export default class BubbleChart extends Component {
         bubbleClickFun(d.label);
     });
 
+    // node.append("circle")
+    //   .attr("id", function(d) { return d.id; })
+    //   .attr("r", function(d) { return d.r - (d.r * .04); })
+    //   .style("fill", function(d) { return d.data.color ? d.data.color : color(nodes.indexOf(d)); })
+    //   .style("z-index", 1)
+    //   .on('mouseover', function(d) {
+    //     d3.select(this).attr("r", d.r * 1.04);
+    //   })
+    //   .on('mouseout', function(d) {
+    //     const r = d.r - (d.r * 0.04);
+    //     d3.select(this).attr("r", r);
+    //   });
     node.append("circle")
-      .attr("id", function(d) { return d.id; })
-      .attr("r", function(d) { return d.r - (d.r * .04); })
-      .style("fill", function(d) { return d.data.color ? d.data.color : color(nodes.indexOf(d)); })
-      .style("z-index", 1)
-      .on('mouseover', function(d) {
-        d3.select(this).attr("r", d.r * 1.04);
-      })
-      .on('mouseout', function(d) {
-        const r = d.r - (d.r * 0.04);
-        d3.select(this).attr("r", r);
-      });
+  .attr("id", function(d) { return d.id; })
+  .attr("r", function(d) { return d.r - (d.r * .04); })
+  .style("fill", function(d) { return d.data.color ? d.data.color : color(nodes.indexOf(d)); })
+  .style("z-index", 1)
+  .on('mouseover', function(d) {
+    d3.select(this).transition().duration(200).attr("r", d.r * 1.04);
+  })
+  .on('mouseout', function(d) {
+    d3.select(this).transition().duration(200).attr("r", d.r - (d.r * 0.04));
+  });
 
     node.append("clipPath")
       .attr("id", function(d) { return "clip-" + d.id; })
